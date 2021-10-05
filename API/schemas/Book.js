@@ -28,7 +28,7 @@ const bookSchema = new Schema({
     year_published: {
         type: Number
     },
-    amount: {
+    qty: {
         type: Number
     },
     image_Url: {

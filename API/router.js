@@ -20,7 +20,7 @@ router.get('/authors/:authorId', AuthorController.getAuthor);
 router.get('/order', OrderController.getOrder);
 router.post('/order', OrderController.createOrder);
 router.patch('/order', OrderController.changeOrderStatus);
-router.put('/order/item', OrderController.updateOrder);
+router.put('/order/item', OrderController.addItemToOrder);
 
 export default router;
 

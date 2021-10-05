@@ -10,6 +10,10 @@ const orderItemSchema = new Schema({
     price: {
         type: Number,
         required: true
+    },
+    qty: {
+        type: Number,
+        required: true
     }
 
 })
@@ -28,6 +32,7 @@ const orderSchema = new Schema({
     items: {
         type: [orderItemSchema],
     }
+
 },{timestamps: true});
 
 export const Order = mongoose.model('Order', orderSchema);

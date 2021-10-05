@@ -5,7 +5,7 @@ import { Book } from '../schemas/Book.js';
 export class BookController {
 
     static async getAllBooks(req, res) {
-        const { genres, title, sort, offset, limit } = req.query;
+        const { genres, title, sort='title', offset = 0, limit = 10 } = req.query;
 
         const booksFilter = _.pickBy({
             title,
