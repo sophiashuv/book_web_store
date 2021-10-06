@@ -2,14 +2,17 @@ import express from 'express';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import bodyParser from 'body-parser'
+import cors from 'cors';
+
 
 dotenv.config();
 
 import router from './router.js';
 
 const app = express();
-const port = 3000;
+const port = 3001;
 
+app.use(cors());
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded())
 app.use(router);
