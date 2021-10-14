@@ -1,7 +1,7 @@
 import _ from 'lodash';
 
 import { Book } from '../schemas/Book.js';
-
+import { Author } from '../schemas/Author.js';
 export class BookController {
 
     static async getAllBooks(req, res) {
@@ -30,5 +30,15 @@ export class BookController {
         const book = await Book.findById(bookId);
 
         res.status(200).json(book);
+    }
+
+    static async getBookAuthors(req, res) {
+        const { bookId } = req.params;
+        const book = await Book.findById(bookId);
+        const author_promises = book.authors.map(authorId => {
+            return Author.findById(authorId)
+        })
+        const authors = await Promise.all(author_promises)
+        res.status(200).json(authors);
     }
 }

@@ -1,0 +1,58 @@
+.book-item-title {
+    color: blue;
+}
+
+.book-item-author {
+    color: green;
+}
+
+.book-item-genres {
+    color: blue;
+}
+
+.book-item-pages {
+    color: green;
+}
+
+.book-item-publishing_house {
+    color: blue;
+}
+
+.book-item-year_published {
+    color: green;
+}
+
+.book-item-year_description {
+    color: green;
+}
+
+.book-container{
+    /*background-color: #2382c3;*/
+    box-sizing: border-box;
+    color: black;
+    border: 1px solid lightgray;
+    background-color: aliceblue;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+}
+
+.book-page-container{
+    display: flex;
+    flex-wrap: wrap;
+    padding: 10px;
+}
+
+.button-container{
+    padding: 10px;
+}
+
+.book-main-info-container{
+    padding: 10px;
+}
+
+.book-image-container{
+    padding: 10px;
+}

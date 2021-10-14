@@ -1,3 +1,14 @@
 .books-filters {
-    background-color: aquamarine;
+    background-color: aliceblue;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.search-wrapper {
+    width: 300px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }

@@ -1,0 +1,97 @@
+import {Component} from 'react';
+import Grid from '@mui/material/Grid';
+import {keyBy} from 'lodash'
+
+import './index.css';
+import {findBook, getBookAuthors} from "../../api/api";
+import React from "react";
+import {Switch, Route,} from "react-router-dom";
+import { withRouter } from "react-router";
+import { useHistory } from 'react-router-dom';
+import {Link} from "react-router-dom";
+import {Nav} from "react-bootstrap";
+
+class BookPageComponent extends Component {
+
+    constructor(props){
+        super(props);
+        this.state = {
+            isBookLoading: false,
+            book: {},
+            areAuthorsLoading: false,
+            authors: [],
+        };
+
+    }
+
+    componentDidMount() {
+        this.loadBook();
+        this.loadAuthors();
+    }
+
+
+    async loadBook(){
+        this.setState({isBookLoading: true});
+
+        const product_id = this.props.match.params.productId
+        const book = await findBook(product_id);
+        this.setState({book: book});
+        this.setState({isBookLoading: false});
+    }
+
+    async loadAuthors() {
+        this.setState({areAuthorsLoading: true});
+        const product_id = this.props.match.params.productId
+        const authors = await getBookAuthors(product_id);
+        this.setState({authors: authors});
+        this.setState({areAuthorsLoading: false});
+    }
+
+
+    render() {
+
+        // const history = useHistory();
+        // const handleClick = () => history.push('/products');
+
+            return (
+            <>
+                <div>
+                    <div>
+                        {this.state.isBookLoading && (<>Book is loading.....</>)}
+
+                        {!this.state.isBookLoading && (
+                            <div className="book-page-container">
+                                <div className="button-container">
+                                   {/*<button type="button" onClick={() => handleClick}>Back</button>*/}
+                                    <Nav.Link >
+                                        <Link to='/products'><div>Back</div></Link>
+                                    </Nav.Link>
+                                </div>
+                                <div className="book-container">
+                                    <div className="book-main-info-container">
+                                        <div className="book-item-title">Title: {this.state.book.title}</div>
+                                        <div className="book-item-genres">Genres: {this.state.book.genres}</div>
+                                        <div className="book-item-authors">Authors: {this.state.authors.map(author => author.name).join(", ")}</div>
+                                        <div className="book-item-pages">Pages: {this.state.book.pages}</div>
+                                        <div className="book-item-publishing_house">Publishing house: {this.state.book.publishing_house}</div>
+                                        <div className="book-item-year_published">Year published: {this.state.book.year_published}</div>
+                                        <div className="book-item-description">Description: {this.state.book.description}</div>
+                                    </div>
+                                    <div className="book-image-container">
+                                        <img className="photo" src={this.state.book.image_Url} alt=""/>
+                                    </div>
+                                </div>
+                                <div className="button-container">
+                                    <button type="button" onClick={()=>alert("Adding to cart")}>Add to cart</button>
+                                </div>
+                            </div>
+
+                        )}
+                    </div>
+                </div>
+            </>
+        );
+    }
+}
+
+export default withRouter(BookPageComponent);

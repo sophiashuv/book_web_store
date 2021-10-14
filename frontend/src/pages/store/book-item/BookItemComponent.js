@@ -1,22 +1,36 @@
 import {Component} from 'react';
 
 import './index.css';
+import Box from '@mui/material/Box';
+import Grid from '@mui/material/Grid';
+import {Nav} from "react-bootstrap";
+import {Link} from "react-router-dom";
 
 export class BookItemComponent extends Component {
+
 
     render() {
         const book = this.props.book;
         return (
             <>
                 <div className="book-item-container">
-                    <span className="book-item-title">
-                    {book.title}
-                    </span>
-                    <span className="book-item-author">
-                    {book.author}
-                    </span>
+                    <div className="book-item-main-info">
+                        <Nav.Link >
+                            <Link to={`/products/${book._id}`}><div className="book-item-title">{book.title}</div></Link>
+                        </Nav.Link>
+                    </div>
+                    <div className="book-item-img-wrapper">
+                        <img className="book-item-img" src={book.image_Url || "../assets/not_loaded.jpg"} alt="book photo"/>
+
+                    </div>
+                    <div className="book-item-navigation">
+                        <div className="book-item-price">{book.price} $</div>
+                        <button type="button" onClick={()=>alert("Adding to cart")}>Add to cart</button>
+                    </div>
                 </div>
             </>
         );
     }
+
+
 }

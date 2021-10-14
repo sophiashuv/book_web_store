@@ -12,6 +12,7 @@ router.get("/anonymousToken", AuthController.getAnonToken);
 /** Books routes */
 router.get('/books', BookController.getAllBooks);
 router.get('/books/:bookId', BookController.getBook);
+router.get('/books/:bookId/authors', BookController.getBookAuthors);
 
 /** Authors routes */
 router.get('/authors/:authorId', AuthorController.getAuthor);

@@ -1,20 +1,19 @@
 import React from "react";
-import {
-    BrowserRouter as Router,
-    Switch,
-    Route,
-    Link
-} from "react-router-dom";
+import {Switch, Route} from "react-router-dom";
 import {StorePageComponent} from "./pages/store/StorePageComponent";
+import BookPageComponent from "./pages/book/BookPageComponent";
+import {RegisterPageComponent} from "./pages/register/RegisterPageComponent";
 
-export default function AppRouter() {
+export default function MainComponents() {
     return (
-        <Router>
-            <Switch>
-                <Route path="/about"><div>about</div></Route>
-                <Route path="/users"><div>users</div></Route>
-                <Route path="/"><StorePageComponent /></Route>
-            </Switch>
-        </Router>
+
+        <Switch>
+            <Route exact path="/about"><div>about</div></Route>
+            <Route exact path="/users"><div>users</div></Route>
+            <Route exact path="/products"><StorePageComponent /></Route>
+            <Route exact path="/register"><RegisterPageComponent /></Route>
+            <Route path="/products/:productId"><BookPageComponent /></Route>
+        </Switch>
+
     );
 }

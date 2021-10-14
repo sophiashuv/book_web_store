@@ -1,5 +1,10 @@
 .book-item-container {
-    background-color: red;
+    /*background-color: #2382c3;*/
+    box-sizing: border-box;
+    padding: 20px;
+    color: black;
+    width: 25%;
+    border: 1px solid lightgray;
 }
 
 .book-item-title {
@@ -9,3 +14,35 @@
 .book-item-author {
     color: green;
 }
+
+
+.book-item-main-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 5px;
+    text-align: center;
+    height: 110px;
+}
+
+.book-item-img-wrapper {
+    height: 400px;
+    display: flex;
+    justify-content: center;
+}
+
+.book-item-img {
+    /*width: 100%;*/
+    height: fit-content;
+    max-height: 100%;
+    max-width: 100%;
+}
+
+.book-item-navigation{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+}
+

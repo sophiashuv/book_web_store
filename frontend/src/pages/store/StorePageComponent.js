@@ -35,19 +35,17 @@ export class StorePageComponent extends Component {
             <>
                 <div className="store-pate-container">
                     <BooksFiltersComponent />
-                    <div>
+                    <div className="books-card-container">
 
                         {this.state.areBooksLoading && (<>Books are loading.....</>)}
 
-                        {!this.state.areBooksLoading && (
-                            <Grid container spacing={2}>
-                                {this.state.books.map(book => (<>
-                                    <Grid item xs={6}>
+                        {!this.state.areBooksLoading &&
+
+                                this.state.books.map(book => (
                                         <BookItemComponent key={book._id} book={book}/>
-                                    </Grid>
-                                </>))}
-                            </Grid>
-                        )}
+                                ))}
+
+
                     </div>
                 </div>
             </>
