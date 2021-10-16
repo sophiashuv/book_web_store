@@ -15,16 +15,18 @@ export class StorePageComponent extends Component {
             areBooksLoading: false,
             books: [],
         };
+
+        this.searchBooks = this.searchBooks.bind(this);
     }
 
     componentDidMount() {
-        this.loadBooks();
+        this.searchBooks();
     }
 
 
-    async loadBooks(){
+    async searchBooks(filters = {}){
         this.setState({areBooksLoading: true});
-        const books = await findBooks();
+        const books = await findBooks(filters);
         this.setState({books: books.books});
         this.setState({areBooksLoading: false});
         console.log(this.state.books);
@@ -34,7 +36,7 @@ export class StorePageComponent extends Component {
         return (
             <>
                 <div className="store-pate-container">
-                    <BooksFiltersComponent />
+                    <BooksFiltersComponent onSearch={this.searchBooks}/>
                     <div className="books-card-container">
 
                         {this.state.areBooksLoading && (<>Books are loading.....</>)}
@@ -44,7 +46,6 @@ export class StorePageComponent extends Component {
                                 this.state.books.map(book => (
                                         <BookItemComponent key={book._id} book={book}/>
                                 ))}
-
 
                     </div>
                 </div>

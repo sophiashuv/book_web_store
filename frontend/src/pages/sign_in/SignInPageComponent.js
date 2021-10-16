@@ -1,9 +1,9 @@
 import {Component} from "react";
 import {Form, Button} from "react-bootstrap";
 import './index.css';
-import {signin, signup} from "../../api/api";
+import {signin} from "../../api/api";
 
-export class RegisterPageComponent extends Component {
+export class SignInPageComponent extends Component {
 
     constructor(props) {
         super(props);
@@ -16,7 +16,7 @@ export class RegisterPageComponent extends Component {
 
         this.onEmailChange = this.onEmailChange.bind(this);
         this.onPassChange = this.onPassChange.bind(this);
-        this.onSignup = this.onSignup.bind(this);
+        this.onSignin = this.onSignin.bind(this);
     }
 
     onEmailChange(e) {
@@ -29,11 +29,11 @@ export class RegisterPageComponent extends Component {
         this.setState({password: value});
     }
 
-    async onSignup() {
+    async onSignin() {
         this.setState({isLoginLoading: true});
         const {email, password} = this.state;
         try {
-            await signup(email, password);
+            await signin(email, password);
             alert('Welcome!');
         } catch (e) {
             alert('Wrong credentials.');
@@ -42,13 +42,12 @@ export class RegisterPageComponent extends Component {
         }
     }
 
-
     render() {
         return (
             <div className="form-wrapper">
                 <Form>
                     <Form.Group className="mb-3">
-                        <div className="registration-title">Sign up</div>
+                        <div className="sign-in-title">Sign in</div>
                     </Form.Group>
                     <Form.Group className="mb-3" controlId="formBasicEmail">
                         <Form.Label>Email address</Form.Label>
@@ -74,7 +73,7 @@ export class RegisterPageComponent extends Component {
                     <Form.Group className="mb-3" controlId="formBasicCheckbox">
                         <Form.Check type="checkbox" label="Check me out"/>
                     </Form.Group>
-                    <Button variant="primary" onClick={this.onSignup}>
+                    <Button variant="primary" onClick={this.onSignin}>
                         {this.state.isLoginLoading ? 'Loading....' : 'Sign in'}
                     </Button>
                 </Form>

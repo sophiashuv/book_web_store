@@ -1,28 +1,33 @@
-.book-item-title {
+.book-title {
     color: blue;
 }
 
-.book-item-author {
+.book-author {
     color: green;
 }
 
-.book-item-genres {
+.book-genres {
     color: blue;
 }
 
-.book-item-pages {
+.book-pages {
     color: green;
 }
 
-.book-item-publishing_house {
+.book-publishing_house {
     color: blue;
 }
 
-.book-item-year_published {
+.book-year_published {
     color: green;
 }
 
-.book-item-year_description {
+.book-year_description {
+    color: green;
+
+}
+
+.book-price{
     color: green;
 }
 
@@ -32,17 +37,17 @@
     color: black;
     border: 1px solid lightgray;
     background-color: aliceblue;
-    padding: 10px;
+    padding: 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-
 }
 
 .book-page-container{
     display: flex;
     flex-wrap: wrap;
     padding: 10px;
+    flex-direction: column;
 }
 
 .button-container{
@@ -51,8 +56,21 @@
 
 .book-main-info-container{
     padding: 10px;
+    width: 50%;
 }
 
 .book-image-container{
     padding: 10px;
+}
+
+.book-img-wrapper {
+    height: 400px;
+    display: flex;
+}
+
+.book-img {
+    /*width: 100%;*/
+    height: fit-content;
+    max-height: 100%;
+    max-width: 100%;
 }

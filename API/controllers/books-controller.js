@@ -1,16 +1,18 @@
 import _ from 'lodash';
 
-import { Book } from '../schemas/Book.js';
-import { Author } from '../schemas/Author.js';
+import {Book} from '../schemas/Book.js';
+import {Author} from '../schemas/Author.js';
+
 export class BookController {
 
     static async getAllBooks(req, res) {
-        const { genres, title, sort='title', offset = 0, limit = 10 } = req.query;
+        const {genres, searchTerm, sort = 'title', offset = 0, limit = 10} = req.query;
 
         const booksFilter = _.pickBy({
-            title,
-            genres: genres && { $in: genres.split(',')}
+            $text: searchTerm && {$search: searchTerm},
+            genres: genres && {$in: genres.split(',')}
         });
+
         const totNumberOfBooksPromise = Book
             .find(booksFilter).count()
 
@@ -26,14 +28,14 @@ export class BookController {
     }
 
     static async getBook(req, res) {
-        const { bookId } = req.params;
+        const {bookId} = req.params;
         const book = await Book.findById(bookId);
 
         res.status(200).json(book);
     }
 
     static async getBookAuthors(req, res) {
-        const { bookId } = req.params;
+        const {bookId} = req.params;
         const book = await Book.findById(bookId);
         const author_promises = book.authors.map(authorId => {
             return Author.findById(authorId)

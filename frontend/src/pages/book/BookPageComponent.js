@@ -69,16 +69,17 @@ class BookPageComponent extends Component {
                                 </div>
                                 <div className="book-container">
                                     <div className="book-main-info-container">
-                                        <div className="book-item-title">Title: {this.state.book.title}</div>
-                                        <div className="book-item-genres">Genres: {this.state.book.genres}</div>
-                                        <div className="book-item-authors">Authors: {this.state.authors.map(author => author.name).join(", ")}</div>
-                                        <div className="book-item-pages">Pages: {this.state.book.pages}</div>
-                                        <div className="book-item-publishing_house">Publishing house: {this.state.book.publishing_house}</div>
-                                        <div className="book-item-year_published">Year published: {this.state.book.year_published}</div>
-                                        <div className="book-item-description">Description: {this.state.book.description}</div>
+                                        <div className="book-title">Title: {this.state.book.title}</div>
+                                        <div className="book-genres">Genres: {this.state.book.genres}</div>
+                                        <div className="book-authors">Authors: {this.state.authors.map(author => author.name).join(", ")}</div>
+                                        <div className="book-pages">Pages: {this.state.book.pages}</div>
+                                        <div className="book-publishing_house">Publishing house: {this.state.book.publishing_house}</div>
+                                        <div className="book-year_published">Year published: {this.state.book.year_published}</div>
+                                        <div className="book-description">Description: {this.state.book.description}</div>
+                                        <div className="book-price">Price: {this.state.book.price}$</div>
                                     </div>
-                                    <div className="book-image-container">
-                                        <img className="photo" src={this.state.book.image_Url} alt=""/>
+                                    <div className="book-img-wrapper">
+                                        <img className="book-img" src={this.state.book.image_Url} alt=""/>
                                     </div>
                                 </div>
                                 <div className="button-container">
