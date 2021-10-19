@@ -5,6 +5,7 @@ import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import {Nav} from "react-bootstrap";
 import {Link} from "react-router-dom";
+import {addToCart} from "../../../api/api";
 
 export class BookItemComponent extends Component {
 
@@ -25,7 +26,7 @@ export class BookItemComponent extends Component {
                     </div>
                     <div className="book-item-navigation">
                         <div className="book-item-price">{book.price} $</div>
-                        <button type="button" onClick={()=>alert("Adding to cart")}>Add to cart</button>
+                        <button type="button" onClick={()=>addToCart(book.id)}>Add to cart</button>
                     </div>
                 </div>
             </>

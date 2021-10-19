@@ -3,8 +3,8 @@ import { User } from '../schemas/User.js';
 
 const jwtSecret = 'verysecret';
 
-export const generateAuthToken = (userId) => {
-    return jwt.sign({ userId }, jwtSecret);
+export const generateAuthToken = (userId, role) => {
+    return jwt.sign({ userId, role }, jwtSecret);
 }
 
 export const decryptToken = (token) => {

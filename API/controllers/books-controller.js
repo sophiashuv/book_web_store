@@ -1,4 +1,5 @@
 import _ from 'lodash';
+import jwt from 'jsonwebtoken';
 
 import {Book} from '../schemas/Book.js';
 import {Author} from '../schemas/Author.js';
@@ -43,4 +44,12 @@ export class BookController {
         const authors = await Promise.all(author_promises)
         res.status(200).json(authors);
     }
+
+    static async createBook(req, res) {
+        const decoded = jwt.decode(req.header.token);
+
+
+        res.status(200).json(authors);
+    }
+
 }

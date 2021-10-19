@@ -26,7 +26,8 @@ export class UserController {
         const passHash = await bcrypt.hash(password, saltRounds);
         const new_user = new User({
             email: email,
-            password: passHash
+            password: passHash,
+            role: "User"
         });
 
         const created_user = await new_user.save();
@@ -63,7 +64,7 @@ export class UserController {
             return;
         }
 
-        const token = generateAuthToken(user._id);
+        const token = generateAuthToken(user._id, user.role);
 
         res.status(200).json({
             authToken: token,

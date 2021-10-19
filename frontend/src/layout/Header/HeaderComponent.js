@@ -16,10 +16,16 @@ export class HeaderComponent extends Component {
                             <Link to="/register">Register</Link>
                         </Nav.Link>
                         <Nav.Link >
-                            <Link to="/log_up">Log up</Link>
+                            <Link to="/sign_in">Sign in</Link>
                         </Nav.Link>
                         <Nav.Link >
                             <Link to="/cart">Cart</Link>
+                        </Nav.Link>
+                        <Nav.Link >
+                            <Link to="/add_book">Add Book</Link>
+                        </Nav.Link>
+                        <Nav.Link >
+                            <Link to="/add_author">Add Author</Link>
                         </Nav.Link>
                     </Nav>
                 </Container>

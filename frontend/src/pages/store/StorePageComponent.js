@@ -29,7 +29,6 @@ export class StorePageComponent extends Component {
         const books = await findBooks(filters);
         this.setState({books: books.books});
         this.setState({areBooksLoading: false});
-        console.log(this.state.books);
     }
 
     render() {

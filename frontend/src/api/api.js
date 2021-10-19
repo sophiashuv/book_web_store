@@ -75,3 +75,8 @@ export const signup = async (email, password) => {
 
     return response.data;
 };
+
+export const addToCart = async () => {
+    await instance.post('/order');
+
+};
