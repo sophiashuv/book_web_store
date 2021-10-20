@@ -7,7 +7,8 @@ import {Author} from '../schemas/Author.js';
 export class BookController {
 
     static async getAllBooks(req, res) {
-        const {genres, searchTerm, sort = 'title', offset = 0, limit = 10} = req.query;
+        let {genres, searchTerm, sort = 'title', offset = 0, limit = 8, page=1} = req.query;
+        // offset = (page - 1) * 8;
 
         const booksFilter = _.pickBy({
             $text: searchTerm && {$search: searchTerm},
@@ -23,9 +24,8 @@ export class BookController {
             .skip(Number(offset)).limit(Number(limit));
 
         const [totNumberOfBooks, books] = await Promise.all([totNumberOfBooksPromise, booksPromise])
-        // res.status(200).json({count: books.length, books: books.slice(Number(offset), Number(limit) + Number(offset))});
-        res.status(200).json({count: totNumberOfBooks, books: books});
-        // res.status(200).json(books);
+        const next = offset + limit < totNumberOfBooks;
+        res.status(200).json({count: totNumberOfBooks, next: next, books: books});
     }
 
     static async getBook(req, res) {
@@ -46,13 +46,14 @@ export class BookController {
     }
 
     static async createBook(req, res) {
-        const newBook = new Book(req.body);
+        const {body} = req.body;
+        const newBook = new Book(body);
         const created_book = await newBook.save();
         res.status(200).json(created_book);
     }
 
     static async discount(req, res) {
-        const { genres, discount } = req.body;
+        const { genres, discount } = req.body.body;
 
         const booksFilter = _.pickBy({
             genres: genres && { $in: genres },

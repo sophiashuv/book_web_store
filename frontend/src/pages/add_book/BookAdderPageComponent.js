@@ -38,97 +38,69 @@ export class BookAdderPageComponent extends Component {
 
 
     onTitleChange(e) {
-        e.preventDefault()
-        const { value } = e.target.value;
+        const { value } = e.target;
         this.setState({ title: value });
     }
 
     onAuthorsChange(e) {
-        e.preventDefault()
         const { value } = e.target;
         this.setState({ authors: value.split(" ") });
     }
 
     onGenresChange(e) {
-        e.preventDefault()
         const { value } = e.target;
         this.setState({ genres: value.split(" ") });
     }
 
     onPriceChange(e) {
-        e.preventDefault()
         const { value } = e.target;
         this.setState({ price: value });
     }
 
     onPagesChange(e) {
-        e.preventDefault()
         const { value } = e.target;
         this.setState({ pages: value });
     }
 
     onPublishing_houseChange(e) {
-        e.preventDefault()
         const { value } = e.target;
         this.setState({ publishing_house: value });
     }
 
     onYear_publishedChange(e) {
-        e.preventDefault()
         const { value } = e.target;
         this.setState({ year_published: value });
     }
 
     onQtyChange(e) {
-        e.preventDefault()
         const { value } = e.target;
         this.setState({ qty: value });
     }
 
     onImage_UrlChange(e) {
-        e.preventDefault()
         const { value } = e.target;
-        this.setState({ image_url: value });
+        this.setState({ image_Url: value });
     }
 
     onDescriptionChange(e) {
-        e.preventDefault()
         const { value } = e.target;
         this.setState({ description: value });
     }
 
-    // async onAddBook() {
-    //     this.setState({ isLoginLoading: true });
-    //     try {
-    //         await createBook(this.state);
-    //         alert("Book created!");
-    //     } catch (e) {
-    //         alert("Wrong credentials.");
-    //     } finally {
-    //         this.setState({ isLoginLoading: false });
-    //     }
-    // }
-
-    // async onAddBook() {
-    //
-    //     const newBook = this.state;
-    //     alert(newBook)
-    //     try {
-    //         await createBook(newBook);
-    //         alert("Book created!");
-    //     } catch (e) {
-    //         alert("Wrong credentials.");
-    //     }
-    // }
-
     async onAddBook() {
+        const { title, authors, genres, price, pages, publishing_house, year_published, qty, image_Url, description } = this.state;
 
-        const newBook = this.state;
-        alert(newBook.title)
+        this.setState({ isLoginLoading: true });
+        try {
+            await createBook({ title, authors, genres, price, pages, publishing_house, year_published, qty, image_Url, description });
+            alert("Book created!");
+        } catch (e) {
+            alert("Wrong credentials.");
+        } finally {
+            this.setState({ isLoginLoading: false });
+            }
+        }
 
-        await createBook(newBook);
-        alert("Book created!");
-    }
     render() {
         return (
             <div className="form-wrapper">
@@ -152,6 +124,15 @@ export class BookAdderPageComponent extends Component {
                             placeholder="Enter genres"
                             value={this.state.genres}
                             onChange={this.onGenresChange}
+                        />
+                    </Form.Group>
+                    <Form.Group className="mb-3">
+                        <Form.Label>Image url</Form.Label>
+                        <Form.Control
+                            type="text"
+                            placeholder="Enter img_url"
+                            value={this.state.image_Url}
+                            onChange={this.onImage_UrlChange}
                         />
                     </Form.Group>
                     <Form.Group className="mb-3">
@@ -217,7 +198,9 @@ export class BookAdderPageComponent extends Component {
                             onChange={this.onQtyChange}
                         />
                     </Form.Group>
-                    <Button variant="primary" type="submit" onClick={this.onAddBook}>
+                    <Button variant="primary"
+                            type="submit"
+                            onClick={this.onAddBook}>
                         Add book
                     </Button>
                 </Form>

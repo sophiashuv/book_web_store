@@ -8,10 +8,33 @@ import {Link} from "react-router-dom";
 import {addToCart} from "../../../api/api";
 
 export class BookItemComponent extends Component {
+    constructor(props) {
+        super(props);
 
+        this.state = {
+            isLoginLoading: false
+        };
+
+        this.onAddBookToCart = this.onAddBookToCart.bind(this);
+    }
+
+    async onAddBookToCart() {
+        const book_id = this.props.book._id;
+
+        this.setState({ isLoginLoading: true });
+        try {
+            await addToCart(book_id);
+            alert("Book added!");
+        } catch (e) {
+            alert("Wrong credentials.");
+        } finally {
+            this.setState({ isLoginLoading: false });
+        }
+    }
 
     render() {
         const book = this.props.book;
+
         return (
             <>
                 <div className="book-item-container">
@@ -26,7 +49,8 @@ export class BookItemComponent extends Component {
                     </div>
                     <div className="book-item-navigation">
                         <div className="book-item-price">{book.price} $</div>
-                        <button type="button" onClick={()=>addToCart(book.id)}>Add to cart</button>
+                        <button type="button" onClick={this.onAddBookToCart}>Add to cart</button>
+                        {/*<button type="button">Add to cart</button>*/}
                     </div>
                 </div>
             </>

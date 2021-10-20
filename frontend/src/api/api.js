@@ -1,4 +1,5 @@
 import axios from 'axios';
+import jwt from 'jsonwebtoken'
 
 const tokenFromStorage = localStorage.getItem('authToken');
 
@@ -9,6 +10,13 @@ let instance = axios.create({
         anon_token: tokenFromStorage,
     },
 });
+
+export let role;
+
+if (tokenFromStorage){
+    const decoded = jwt.decode(tokenFromStorage);
+    role = decoded.role;
+}
 
 export const findBooks = async (filters = {}) => {
     const response = await instance.get('/books', {
@@ -41,7 +49,8 @@ export const signin = async (email, password) => {
     });
 
     const authToken = response.data.authToken;
-
+    const decoded = jwt.decode(authToken);
+    role = decoded.role;
     instance = axios.create({
         baseURL: 'http://localhost:3001',
         timeout: 1000,
@@ -62,6 +71,8 @@ export const signup = async (email, password) => {
     });
 
     const authToken = response.data.authToken;
+    const decoded = jwt.decode(authToken);
+    role = decoded.role;
 
     instance = axios.create({
         baseURL: 'http://localhost:3001',
@@ -84,34 +95,30 @@ export const createBook = async (newBook) => {
     return response.data;
 }
 
-// export const createBook = async (newBook) => {
-//     alert(newBook)
-//     const response = await instance.post("/books", {
-//         body: newBook,
-//     });
-//
-//     return response.data;
-// };
+export const createAuthor = async (newAuthor) => {
+    const response = await instance.post("/authors", {
+        body: newAuthor,
+    });
 
-export const discount = async (genres, disc) => {
+    return response.data;
+}
+
+export const add_discount = async (disc) => {
     const response = await instance.put("/books", {
-        body: {
-            genres: genres,
-            discount: disc,
-        },
+        body: disc,
     });
 
     return response.data;
 };
 
 
-export const addToCart = async (new_order) => {
-    await instance.post('/order');
+export const addToCart = async (book_id) => {
 
-    const response = await instance.put("/order", {
-        body: new_order,
+    const response = await instance.put("/order/item", {
+        book_id,
     });
-
     return response.data;
 
 };
+
+

@@ -35,6 +35,7 @@ router.patch('/order', OrderController.changeOrderStatus);
 
 router.use(isAdmin);
 router.post('/books', BookController.createBook);
+router.post('/authors', AuthorController.createAuthor);
 router.put('/books', BookController.discount);
 
 export default router;

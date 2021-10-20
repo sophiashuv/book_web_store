@@ -14,6 +14,7 @@ export class StorePageComponent extends Component {
         this.state = {
             areBooksLoading: false,
             books: [],
+            next: false,
         };
 
         this.searchBooks = this.searchBooks.bind(this);
@@ -26,8 +27,9 @@ export class StorePageComponent extends Component {
 
     async searchBooks(filters = {}){
         this.setState({areBooksLoading: true});
-        const books = await findBooks(filters);
-        this.setState({books: books.books});
+        const data = await findBooks(filters);
+
+        this.setState({books: data.books, next: data.next});
         this.setState({areBooksLoading: false});
     }
 

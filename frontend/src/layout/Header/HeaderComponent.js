@@ -1,9 +1,11 @@
 import {Container, Nav, Navbar} from "react-bootstrap";
 import {Component} from "react";
 import {Link} from "react-router-dom";
+import {role} from "../../api/api";
 
 export class HeaderComponent extends Component {
     render() {
+        console.log(role);
         return (
             <Navbar bg="light" variant="light">
                 <Container>
@@ -21,12 +23,21 @@ export class HeaderComponent extends Component {
                         <Nav.Link >
                             <Link to="/cart">Cart</Link>
                         </Nav.Link>
-                        <Nav.Link >
-                            <Link to="/add_book">Add Book</Link>
-                        </Nav.Link>
-                        <Nav.Link >
-                            <Link to="/add_author">Add Author</Link>
-                        </Nav.Link>
+
+                        {role === "Admin" && (
+                            <Nav.Link >
+                                <Link to="/add_book">Add Book</Link>
+                            </Nav.Link>)}
+                        {role === "Admin" && (
+                            <Nav.Link >
+                                <Link to="/add_author">Add Author</Link>
+                            </Nav.Link>)}
+                        {role === "Admin" && (
+                            <Nav.Link >
+                            <Link to="/add_discount">Add Discount</Link>
+
+                        </Nav.Link>)}
+
                     </Nav>
                 </Container>
             </Navbar>

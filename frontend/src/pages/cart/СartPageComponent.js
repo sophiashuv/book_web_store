@@ -24,7 +24,6 @@ export default class CartPageComponent extends Component {
         this.searchBooks();
     }
 
-
     async getOrders(filters = {}){
         this.setState({areOrdersLoading: true});
         const books = await findBooks(filters);

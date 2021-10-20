@@ -3,7 +3,6 @@ import {Component} from 'react';
 import {Dropdown, Button, Form} from 'react-bootstrap';
 
 import './index.css';
-import {signin} from "../../../api/api";
 
 export class BooksFiltersComponent extends Component {
 
@@ -13,11 +12,13 @@ export class BooksFiltersComponent extends Component {
         this.state = {
             searchTerm: '',
             genres: '',
+            sort: ''
         };
 
         this.onSearchTermChange = this.onSearchTermChange.bind(this);
         this.onSearch = this.onSearch.bind(this);
         this.onGenreChange = this.onGenreChange.bind(this);
+        this.onSortChange = this.onSortChange.bind(this);
     }
 
     onSearchTermChange(e) {
@@ -30,10 +31,17 @@ export class BooksFiltersComponent extends Component {
         this.setState({genres: value});
     }
 
+    onSortChange(e) {
+        const {value} = e.target;
+        this.setState({sort: value});
+    }
+
+
     async onSearch() {
-        const {searchTerm, genres} = this.state;
+        const {searchTerm, genres, sort} = this.state;
+
         await this.props.onSearch({
-            searchTerm, genres,
+            searchTerm, genres, sort
         });
     }
 
@@ -43,10 +51,16 @@ export class BooksFiltersComponent extends Component {
             <div className="books-filters">
                 <div className="genres-wrapper">
                     <Form.Select aria-label="Default select example" onChange={this.onGenreChange}>
-                        <option value="">Open this select menu</option>
-                        <option value="Horror">Horror</option>
-                        <option value="Fantasy">Fantasy</option>
+                        <option value="">All Genres</option>
+                        <option value="Functional Analysis">Functional Analysis</option>
                         <option value="Math">Math</option>
+                        <option value="Physics">Physics</option>
+                        <option value="Geometry">Geometry</option>
+                    </Form.Select>
+
+                    <Form.Select aria-label="Default select example" onChange={this.onSortChange}>
+                        <option value="title">Title</option>
+                        <option value="pages">pages</option>
                     </Form.Select>
                 </div>
                 <div className="search-wrapper">

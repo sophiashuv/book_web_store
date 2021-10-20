@@ -1,7 +1,9 @@
 import {Component} from "react";
 import {Form, Button} from "react-bootstrap";
 import './index.css';
-import {signin} from "../../api/api";
+import {role, signin} from "../../api/api";
+import history from "../../history";
+import {AuthContext} from "../../authContext";
 
 export class SignInPageComponent extends Component {
 
@@ -34,7 +36,9 @@ export class SignInPageComponent extends Component {
         const {email, password} = this.state;
         try {
             await signin(email, password);
-            alert('Welcome!');
+            this.context.setRole(role);
+
+            history.push("/products")
         } catch (e) {
             alert('Wrong credentials.');
         } finally {
@@ -81,3 +85,5 @@ export class SignInPageComponent extends Component {
         );
     }
 }
+
+SignInPageComponent.contextType = AuthContext;

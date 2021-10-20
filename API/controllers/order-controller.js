@@ -92,7 +92,7 @@ export class OrderController {
     }
 
     static async addItemToOrder(req, res) {
-        const item_id = req.body.item_id
+        const item_id = req.body.book_id
         const user = req.user
 
         let order = await Order

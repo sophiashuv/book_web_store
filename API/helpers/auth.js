@@ -12,7 +12,6 @@ export const decryptToken = (token) => {
 }
 
 export const isAuthorizedMiddleware = async (req, res, next) => {
-    console.log(req)
     const token = req.headers.anon_token;
     if(!token){
         res.status(403).send("Forbidden.");
