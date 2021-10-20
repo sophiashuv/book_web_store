@@ -5,7 +5,7 @@ import { AuthController } from './controllers/auth-controller.js';
 import { OrderController } from './controllers/order-controller.js';
 import { AuthorController } from './controllers/author-controller.js';
 import { UserController } from './controllers/user-controller.js';
-import {isAuthorizedMiddleware} from "./helpers/auth.js";
+import {isAdmin, isAuthorizedMiddleware} from "./helpers/auth.js";
 
 const router = express.Router()
 
@@ -26,13 +26,16 @@ router.get('/books/:bookId/authors', BookController.getBookAuthors);
 router.get('/authors/:authorId', AuthorController.getAuthor);
 
 
+router.use(isAuthorizedMiddleware);
 /** Orders routes */
 router.get('/order', OrderController.getOrder);
 router.post('/order', OrderController.createOrder);
 router.put('/order/item', OrderController.addItemToOrder);
-
-router.use(isAuthorizedMiddleware);
 router.patch('/order', OrderController.changeOrderStatus);
+
+router.use(isAdmin);
+router.post('/books', BookController.createBook);
+router.put('/books', BookController.discount);
 
 export default router;
 

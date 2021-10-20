@@ -19,7 +19,7 @@ const orderItemSchema = new Schema({
 })
 
 const orderSchema = new Schema({
-    anon_token: {
+    user_id: {
         type: String,
         required: true,
     },

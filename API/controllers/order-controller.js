@@ -11,11 +11,11 @@ export class OrderController {
 
 
     static async createOrder(req, res) {
-        const token = req.headers.anon_token
+        const user = req.user
 
         const existing_order = await Order
             .findOne({
-                anon_token : token,
+                user_id : user.id,
                 status: "NotSubmitted"
             });
         if (existing_order) {
@@ -25,7 +25,7 @@ export class OrderController {
         }
 
         const order = new Order({
-            anon_token: token
+            user_id : user.id
         });
         const created_order = await order.save();
         res.status(200).json(created_order);
@@ -33,23 +33,35 @@ export class OrderController {
     }
 
     static async getOrder(req, res) {
-        const token = req.headers.anon_token
+        const user = req.user
 
         const existing_order = await Order
             .findOne({
-                anon_token : token,
+                user_id : user.id,
                 status: "NotSubmitted"
             });
 
         res.status(200).json(existing_order);
     }
 
+    static async getSubmitedOrders(req, res) {
+        const user = req.user
+
+        const existing_orders = await Order
+            .find({
+                user_id : user.id,
+                status: "Submitted"
+            });
+
+        res.status(200).json(existing_orders);
+    }
+
     static async changeOrderStatus(req, res) {
-        const token = req.headers.anon_token
+        const user = req.user
 
         const existing_order = await Order
             .findOne({
-                anon_token : token,
+                user_id : user.id,
                 status: "NotSubmitted"
             });
 
@@ -81,15 +93,23 @@ export class OrderController {
 
     static async addItemToOrder(req, res) {
         const item_id = req.body.item_id
-        const token = req.headers.anon_token
+        const user = req.user
 
-        const existing_order = await Order
+        let order = await Order
             .findOne({
-                anon_token : token,
+                user_id : user.id,
                 status: "NotSubmitted"
             });
 
-        const existing_item = existing_order.items.find(item => item.item_id === item_id)
+        if (!order){
+             order = new Order({
+                user_id : user.id
+            });
+             await order.save();
+
+        }
+
+        const existing_item = order.items.find(item => item.item_id === item_id)
         if (existing_item){
             existing_item.qty += 1
         }
@@ -104,10 +124,10 @@ export class OrderController {
                 price: book.price,
                 qty: 1
             }
-            existing_order.items.push(new_item)
+            order.items.push(new_item)
         }
-        await existing_order.save()
-        res.status(200).json(existing_order);
+        await order.save()
+        res.status(200).json(order);
     }
 
 }

@@ -46,10 +46,25 @@ export class BookController {
     }
 
     static async createBook(req, res) {
-        const decoded = jwt.decode(req.header.token);
+        const newBook = new Book(req.body);
+        const created_book = await newBook.save();
+        res.status(200).json(created_book);
+    }
 
+    static async discount(req, res) {
+        const { genres, discount } = req.body;
 
-        res.status(200).json(authors);
+        const booksFilter = _.pickBy({
+            genres: genres && { $in: genres },
+        });
+
+        const books = await Book.find(booksFilter);
+        books.forEach((book) => {
+            book.price *= (100 - discount) / 100;
+            book.save();
+        });
+
+        res.status(200).json(books);
     }
 
 }

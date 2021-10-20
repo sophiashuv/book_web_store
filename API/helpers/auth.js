@@ -12,8 +12,8 @@ export const decryptToken = (token) => {
 }
 
 export const isAuthorizedMiddleware = async (req, res, next) => {
-    const token = req.headers.Authorization;
-
+    console.log(req)
+    const token = req.headers.anon_token;
     if(!token){
         res.status(403).send("Forbidden.");
         return;
@@ -25,5 +25,13 @@ export const isAuthorizedMiddleware = async (req, res, next) => {
     const user = await User.findById(userId);
     req.user = user;
 
-
+    next();
 }
+
+export const isAdmin = async (req, res, next) => {
+    if (req.user.role !== "Admin") {
+        res.status(403).send("Forbidden.");
+        return;
+    }
+    next();
+};

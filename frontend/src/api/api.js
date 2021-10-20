@@ -6,7 +6,7 @@ let instance = axios.create({
     baseURL: 'http://localhost:3001',
     timeout: 1000,
     headers: {
-        Authorization: tokenFromStorage,
+        anon_token: tokenFromStorage,
     },
 });
 
@@ -46,7 +46,7 @@ export const signin = async (email, password) => {
         baseURL: 'http://localhost:3001',
         timeout: 1000,
         headers: {
-            Authorization: authToken,
+            anon_token: authToken,
         }
     });
 
@@ -67,7 +67,7 @@ export const signup = async (email, password) => {
         baseURL: 'http://localhost:3001',
         timeout: 1000,
         headers: {
-            Authorization: authToken,
+            anon_token: authToken,
         }
     });
 
@@ -76,7 +76,42 @@ export const signup = async (email, password) => {
     return response.data;
 };
 
-export const addToCart = async () => {
+export const createBook = async (newBook) => {
+    const response = await instance.post("/books", {
+        body: newBook,
+    });
+
+    return response.data;
+}
+
+// export const createBook = async (newBook) => {
+//     alert(newBook)
+//     const response = await instance.post("/books", {
+//         body: newBook,
+//     });
+//
+//     return response.data;
+// };
+
+export const discount = async (genres, disc) => {
+    const response = await instance.put("/books", {
+        body: {
+            genres: genres,
+            discount: disc,
+        },
+    });
+
+    return response.data;
+};
+
+
+export const addToCart = async (new_order) => {
     await instance.post('/order');
+
+    const response = await instance.put("/order", {
+        body: new_order,
+    });
+
+    return response.data;
 
 };
