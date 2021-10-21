@@ -8,6 +8,7 @@ import {BookAdderPageComponent} from "./pages/add_book/BookAdderPageComponent";
 import {AuthorAdderPageComponent} from "./pages/add_author/AuthorAdderPageComponent";
 import СartPageComponent from "./pages/cart/СartPageComponent";
 import {DiscountPageComponent} from "./pages/add_discount/DiscountPageComponent";
+import AuthorPageComponent from "./pages/author/AuthorPageComponent";
 import history from "./history";
 
 export default function AppRouter() {
@@ -23,6 +24,7 @@ export default function AppRouter() {
             <Route exact path="/add_author"><AuthorAdderPageComponent /></Route>
             <Route exact path="/add_discount"><DiscountPageComponent /></Route>
             <Route exact path="/cart"><СartPageComponent /></Route>
+            <Route path="/authors/:authortId"><AuthorPageComponent /></Route>
         </Switch>
     );
 }

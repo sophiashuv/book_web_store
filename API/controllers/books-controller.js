@@ -8,7 +8,6 @@ export class BookController {
 
     static async getAllBooks(req, res) {
         let {genres, searchTerm, sort = 'title', offset = 0, limit = 8} = req.query;
-        // offset = (page - 1) * 8;
 
         const booksFilter = _.pickBy({
             $text: searchTerm && {$search: searchTerm},

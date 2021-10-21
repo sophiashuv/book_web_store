@@ -34,6 +34,13 @@ export const findBook = async (id) => {
     return response.data;
 };
 
+export const findAuthor = async (id) => {
+    const response = await instance.get('/authors/' + id, {
+        params: {}
+    });
+    return response.data;
+};
+
 export const getBookAuthors = async (Bookid) => {
     const response = await instance.get('/books/' + Bookid + '/authors', {
         params: {}

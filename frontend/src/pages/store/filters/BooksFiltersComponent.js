@@ -62,6 +62,8 @@ export class BooksFiltersComponent extends Component {
                     <Form.Select aria-label="Default select example" onChange={this.onSortChange}>
                         <option value="title">Title</option>
                         <option value="pages">pages</option>
+                        <option value="price">price</option>
+                        <option value="year_published">year_published</option>
                     </Form.Select>
                 </div>
                 <div className="search-wrapper">

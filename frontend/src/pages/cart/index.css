@@ -5,3 +5,31 @@
     justify-content: space-between;
     align-items: center;
 }
+
+.cart-item-wrapper{
+    display: flex;
+    flex-wrap: wrap;
+    padding: 10px;
+    flex-direction: column;
+}
+
+.item-title{
+    width: 200px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.item-qty{
+    width: 200px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.item-price{
+    width: 200px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}

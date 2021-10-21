@@ -1,7 +1,7 @@
 import {Component} from 'react';
 
 import './index.css';
-import {addToCart, buyOrder, findBook, findBooks, getBookAuthors, getCart} from "../../api/api";
+import {addToCart, buyOrder, deleteOrder,getCart} from "../../api/api";
 import React from "react";
 import { withRouter } from "react-router";
 import {Link} from "react-router-dom";
@@ -56,26 +56,25 @@ export default class CartPageComponent extends Component {
             <form className="cart__wrapper" >
                 <div className="cart__header">Cart:</div>
                 <div className="cart-book-item-container">
-                    <div>Title</div>
-                    <div>Qty</div>
-                    <div>Price</div>
+                    <div className="item-title">Title</div>
+                    <div className="item-qty">Qty</div>
+                    <div className="item-price">Price</div>
                     </div>
-                <div>
-
-                    {this.state.areOrdersLoading && (<>Books are loading.....</>)}
-                       {/*{this.state.areOrdersLoading && !this.state.order.items === undefined &&*/}
-                       {/*{console.log(this.state.order.items)}*/}
-                    {/*{this.state.order.items.map(() => (console.log("----")))}*/}
-                    {/*{this.state.order.items.map((item) =>(*/}
-                    {/*        <div>{item.title}</div>*/}
-                    {/*    // <div>{item.qty}</div>*/}
-                    {/*    // <div>{item.price}</div>*/}
-                    {/*))*/}
-                    {/*}*/}
+                <div className="cart-item-wrapper">
+                        {
+                            this.state.order === null ? <div>Your cart is empty</div> :
+                            this.state.order.items !== undefined && this.state.order.items.map((item) => (
+                                <div className="cart-book-item-container">
+                                    <div className="item-title">{item.title}</div>
+                                    <div className="item-qry">{item.qty}</div>
+                                    <div className="item-price">{item.price}</div>
+                                </div>
+                                ))
+                        }
                 </div>
-                {<div className="cart__total">Sum: {this.state.order.tot_price}$</div>}
+                {<div className="cart__total">Sum: {this.state.order ===null? 0: this.state.order.tot_price}$</div>}
                 <Button variant="secondary" type="submit" className="button button__secondary" onClick={this.onOrderBuy}>Buy</Button>
-                <Button variant="light" type="button" className="cart__clear" onClick={this.onOrderBuy} >Delete</Button>
+                <Button variant="light" type="button" className="cart__clear" onClick={this.onOrderDelete} >Delete</Button>
 
             </form>
 
