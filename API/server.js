@@ -4,7 +4,6 @@ import dotenv from 'dotenv';
 import bodyParser from 'body-parser'
 import cors from 'cors';
 
-
 dotenv.config();
 
 import router from './router.js';
@@ -20,7 +19,6 @@ app.use(router);
 const dbUrl = "mongodb://localhost:27017/store-api"
 
 app.listen(port, async () => {
-
     await mongoose.connect(dbUrl, {
         useNewUrlParser: true,
         useUnifiedTopology: true,

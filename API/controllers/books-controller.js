@@ -1,5 +1,4 @@
 import _ from 'lodash';
-import jwt from 'jsonwebtoken';
 
 import {Book} from '../schemas/Book.js';
 import {Author} from '../schemas/Author.js';

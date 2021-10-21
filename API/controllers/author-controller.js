@@ -1,8 +1,4 @@
-import _ from 'lodash';
-
 import { Author } from '../schemas/Author.js';
-
-
 
 export class AuthorController {
     static async getAuthor(req, res) {

@@ -5,7 +5,6 @@ import {generateAuthToken} from "../helpers/auth.js";
 
 const saltRounds = 5;
 
-
 export class UserController {
 
     static async signup(req, res) {
