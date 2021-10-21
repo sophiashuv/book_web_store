@@ -113,7 +113,6 @@ export const add_discount = async (disc) => {
 
 
 export const addToCart = async (book_id) => {
-
     const response = await instance.put("/order/item", {
         book_id,
     });
@@ -121,4 +120,17 @@ export const addToCart = async (book_id) => {
 
 };
 
+export const getCart = async () => {
+    const response = await instance.get("/order");
+    return response.data;
+};
 
+export const buyOrder = async () => {
+    const response = await instance.patch("/order");
+    return response.data;
+};
+
+export const deleteOrder = async () => {
+    const response = await instance.delete("order");
+    return response.data;
+};

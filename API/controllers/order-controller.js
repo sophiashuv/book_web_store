@@ -106,12 +106,12 @@ export class OrderController {
                 user_id : user.id
             });
              await order.save();
-
         }
-
+        // console.log(order.tot_price)
         const existing_item = order.items.find(item => item.item_id === item_id)
         if (existing_item){
             existing_item.qty += 1
+            order.tot_price += existing_item.price;
         }
         else {
             const book = await Book.findById(item_id)
@@ -120,14 +120,32 @@ export class OrderController {
                 return;
             }
             const new_item = {
+                title: book.title,
                 item_id : item_id,
                 price: book.price,
                 qty: 1
             }
+
+            order.tot_price += book.price;
             order.items.push(new_item)
+
         }
         await order.save()
         res.status(200).json(order);
+    }
+
+
+    static async deleteOrder(req, res) {
+        const user = req.user
+        console.log(user);
+        const existing_order = await Order
+            .findOne({
+                user_id : user.id,
+                status: "NotSubmitted"
+            });
+        console.log(existing_order);
+        await Order.findByIdAndRemove(existing_order._id);
+        res.status(200).json(existing_order);
     }
 
 }

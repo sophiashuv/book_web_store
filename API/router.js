@@ -32,6 +32,7 @@ router.get('/order', OrderController.getOrder);
 router.post('/order', OrderController.createOrder);
 router.put('/order/item', OrderController.addItemToOrder);
 router.patch('/order', OrderController.changeOrderStatus);
+router.delete('/order', OrderController.deleteOrder);
 
 router.use(isAdmin);
 router.post('/books', BookController.createBook);

@@ -7,7 +7,7 @@ import {Author} from '../schemas/Author.js';
 export class BookController {
 
     static async getAllBooks(req, res) {
-        let {genres, searchTerm, sort = 'title', offset = 0, limit = 8, page=1} = req.query;
+        let {genres, searchTerm, sort = 'title', offset = 0, limit = 8} = req.query;
         // offset = (page - 1) * 8;
 
         const booksFilter = _.pickBy({
@@ -24,7 +24,7 @@ export class BookController {
             .skip(Number(offset)).limit(Number(limit));
 
         const [totNumberOfBooks, books] = await Promise.all([totNumberOfBooksPromise, booksPromise])
-        const next = offset + limit < totNumberOfBooks;
+        const next = offset < totNumberOfBooks;
         res.status(200).json({count: totNumberOfBooks, next: next, books: books});
     }
 

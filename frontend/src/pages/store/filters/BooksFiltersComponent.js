@@ -12,7 +12,8 @@ export class BooksFiltersComponent extends Component {
         this.state = {
             searchTerm: '',
             genres: '',
-            sort: ''
+            sort: '',
+            offset: 0
         };
 
         this.onSearchTermChange = this.onSearchTermChange.bind(this);
@@ -38,10 +39,10 @@ export class BooksFiltersComponent extends Component {
 
 
     async onSearch() {
-        const {searchTerm, genres, sort} = this.state;
+        const {searchTerm, genres, sort, offset} = this.state;
 
         await this.props.onSearch({
-            searchTerm, genres, sort
+            searchTerm, genres, sort, offset
         });
     }
 

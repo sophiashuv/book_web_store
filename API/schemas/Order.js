@@ -7,6 +7,9 @@ const orderItemSchema = new Schema({
         type: String,
         required: true
     },
+    title: {
+        type: String
+    },
     price: {
         type: Number,
         required: true
@@ -31,6 +34,10 @@ const orderSchema = new Schema({
     },
     items: {
         type: [orderItemSchema],
+    },
+    tot_price: {
+        type: Number,
+        default: 0
     }
 
 },{timestamps: true});
