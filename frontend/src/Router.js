@@ -24,7 +24,7 @@ export default function AppRouter() {
             <Route exact path="/add_author"><AuthorAdderPageComponent /></Route>
             <Route exact path="/add_discount"><DiscountPageComponent /></Route>
             <Route exact path="/cart"><СartPageComponent /></Route>
-            <Route path="/authors/:authortId"><AuthorPageComponent /></Route>
+            <Route path="/authors/:authorId"><AuthorPageComponent /></Route>
         </Switch>
     );
 }

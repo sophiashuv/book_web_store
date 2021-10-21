@@ -41,10 +41,8 @@ export class StorePageComponent extends Component {
     handleObserver(entities, observer) {
         const y = entities[0].boundingClientRect.y;
         if (this.state.PrevY > y) {
-            console.log(this.state.next)
             if (this.state.next != false) {
                 let curPage = this.state.Page + 8;
-
                 this.searchBooks({offset: curPage});
                 this.setState({ Page: curPage });
             } else {
@@ -64,7 +62,6 @@ export class StorePageComponent extends Component {
             this.setState({books: ff});
         }
 
-        // this.setState({books: data.books});
         this.setState({next: data.next});
         this.setState({areBooksLoading: false});
     }
@@ -90,7 +87,6 @@ export class StorePageComponent extends Component {
                                 this.state.books.map(book => (
                                         <BookItemComponent key={book._id} book={book}/>
                                 ))}
-
                     </div>
                     <div
                         ref={(loadingRef) => (this.loadingRef = loadingRef)}

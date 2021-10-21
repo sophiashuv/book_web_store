@@ -5,7 +5,6 @@ import {role} from "../../api/api";
 
 export class HeaderComponent extends Component {
     render() {
-        console.log(role);
         return (
             <Navbar bg="light" variant="light">
                 <Container>

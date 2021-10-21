@@ -1,7 +1,7 @@
 import {Component} from "react";
 import {Form, Button} from "react-bootstrap";
 import './index.css';
-import {signin, signup} from "../../api/api";
+import {signup} from "../../api/api";
 
 export class RegisterPageComponent extends Component {
 

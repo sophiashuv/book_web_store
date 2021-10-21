@@ -1,14 +1,9 @@
 import {Component} from 'react';
 
 import './index.css';
-import {addToCart, buyOrder, deleteOrder,getCart} from "../../api/api";
+import {buyOrder, deleteOrder,getCart} from "../../api/api";
 import React from "react";
-import { withRouter } from "react-router";
-import {Link} from "react-router-dom";
-import {Nav} from "react-bootstrap";
-import {ListGroup,CloseButton, Button}  from 'react-bootstrap';
-import {BookItemComponent} from "../store/book-item/BookItemComponent";
-import {CartItemComponent} from "./cart-item/CartItemComponent";
+import {Button}  from 'react-bootstrap';
 
 export default class CartPageComponent extends Component {
 

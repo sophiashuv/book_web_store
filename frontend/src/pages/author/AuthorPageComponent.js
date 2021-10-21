@@ -24,8 +24,8 @@ class AuthorPageComponent extends Component {
 
     async loadAuthor(){
         this.setState({isAuthorLoading: true});
-        // const author_id = this.props.match.params.authorId
-        const author_id = "61704ed6c8d4e2fb5d5f230f"
+        const author_id = this.props.match.params.authorId
+        // const author_id = "61704ed6c8d4e2fb5d5f230f"
         const author = await findAuthor(author_id);
         this.setState({author: author});
         this.setState({isAuthorLoading: false});

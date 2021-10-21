@@ -1,8 +1,6 @@
 import {Component} from 'react';
 
 import './index.css';
-import Box from '@mui/material/Box';
-import Grid from '@mui/material/Grid';
 import {Nav} from "react-bootstrap";
 import {Link} from "react-router-dom";
 import {addToCart} from "../../../api/api";
@@ -10,17 +8,14 @@ import {addToCart} from "../../../api/api";
 export class BookItemComponent extends Component {
     constructor(props) {
         super(props);
-
         this.state = {
             isLoginLoading: false
         };
-
         this.onAddBookToCart = this.onAddBookToCart.bind(this);
     }
 
     async onAddBookToCart() {
         const book_id = this.props.book._id;
-
         this.setState({ isLoginLoading: true });
         try {
             await addToCart(book_id);
@@ -50,7 +45,6 @@ export class BookItemComponent extends Component {
                     <div className="book-item-navigation">
                         <div className="book-item-price">{book.price} $</div>
                         <button type="button" onClick={this.onAddBookToCart}>Add to cart</button>
-                        {/*<button type="button">Add to cart</button>*/}
                     </div>
                 </div>
             </>
