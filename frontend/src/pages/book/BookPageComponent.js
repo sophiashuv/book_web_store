@@ -1,7 +1,7 @@
 import {Component} from 'react';
 
 import './index.css';
-import {findBook, getBookAuthors} from "../../api/api";
+import {addToCart, findBook, getBookAuthors} from "../../api/api";
 import React from "react";
 import { withRouter } from "react-router";
 import {Link} from "react-router-dom";
@@ -43,11 +43,20 @@ class BookPageComponent extends Component {
         this.setState({areAuthorsLoading: false});
     }
 
+    async onAddBookToCart(book_id) {
+        this.setState({ isLoginLoading: true });
+        try {
+            await addToCart(book_id);
+            alert("Book added!");
+        } catch (e) {
+            alert("Wrong credentials.");
+        } finally {
+            this.setState({ isLoginLoading: false });
+        }
+    }
+
 
     render() {
-
-        // const history = useHistory();
-        // const handleClick = () => history.push('/products');
 
             return (
             <>
@@ -58,7 +67,6 @@ class BookPageComponent extends Component {
                         {!this.state.isBookLoading && (
                             <div className="book-page-container">
                                 <div className="button-container">
-                                   {/*<button type="button" onClick={() => handleClick}>Back</button>*/}
                                     <Nav.Link >
                                         <Link to='/products'><div>Back</div></Link>
                                     </Nav.Link>
@@ -88,7 +96,7 @@ class BookPageComponent extends Component {
                                     </div>
                                 </div>
                                 <div className="button-container">
-                                    <button type="button" onClick={()=>alert("Adding to cart")}>Add to cart</button>
+                                    <button type="button" onClick={() => this.onAddBookToCart(this.state.book._id)}>Add to cart</button>
                                 </div>
                             </div>
 

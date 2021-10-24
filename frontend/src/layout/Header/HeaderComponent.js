@@ -23,6 +23,10 @@ export class HeaderComponent extends Component {
                             <Link to="/cart">Cart</Link>
                         </Nav.Link>
 
+                        <Nav.Link >
+                            <Link to="/orders">Orders</Link>
+                        </Nav.Link>
+
                         {role === "Admin" && (
                             <Nav.Link >
                                 <Link to="/add_book">Add Book</Link>

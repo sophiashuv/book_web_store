@@ -29,9 +29,10 @@ router.get('/authors/:authorId', AuthorController.getAuthor);
 router.use(isAuthorizedMiddleware);
 /** Orders routes */
 router.get('/order', OrderController.getOrder);
+router.get('/orders', OrderController.getSubmittedOrders);
 router.post('/order', OrderController.createOrder);
 router.put('/order/item', OrderController.addItemToOrder);
-router.patch('/order', OrderController.changeOrderStatus);
+router.patch('/orders', OrderController.changeOrderStatus);
 router.delete('/order', OrderController.deleteOrder);
 
 router.use(isAdmin);

@@ -41,6 +41,18 @@ export class OrderController {
         res.status(200).json(existing_order);
     }
 
+    static async getSubmittedOrders(req, res) {
+        const user = req.user
+
+        const existing_orders = await Order
+            .find({
+                user_id : user.id,
+                status: "Submitted"
+            });
+
+        res.status(200).json(existing_orders);
+    }
+
     static async getSubmitedOrders(req, res) {
         const user = req.user
 

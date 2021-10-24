@@ -132,6 +132,11 @@ export const getCart = async () => {
     return response.data;
 };
 
+export const getOrders = async () => {
+    const response = await instance.get("/orders");
+    return response.data;
+};
+
 export const buyOrder = async () => {
     const response = await instance.patch("/order");
     return response.data;
