@@ -15,6 +15,8 @@ export default class CartPageComponent extends Component {
         };
 
         this.getOrders = this.getOrders.bind(this);
+        this.onOrderBuy = this.onOrderBuy.bind(this);
+        this.onOrderDelete = this.onOrderDelete.bind(this);
     }
 
     componentDidMount() {
@@ -32,7 +34,9 @@ export default class CartPageComponent extends Component {
         try {
             await buyOrder();
             alert("Order bought!");
+            this.getOrders();
         } catch (e) {
+            console.log(e);
             alert("Wrong credentials.");
         }
     }
@@ -41,6 +45,7 @@ export default class CartPageComponent extends Component {
         try {
             await deleteOrder();
             alert("Order deleted!");
+            await this.getOrders();
         } catch (e) {
             alert("Wrong credentials.");
         }
@@ -48,7 +53,7 @@ export default class CartPageComponent extends Component {
 
     render() {
         return (
-            <form className="cart__wrapper" >
+            <>
                 <div className="cart__header">Cart:</div>
                 <div className="cart-book-item-container">
                     <div className="item-title">Title</div>
@@ -58,8 +63,8 @@ export default class CartPageComponent extends Component {
                 <div className="cart-item-wrapper">
                         {
                             this.state.order === null ? <div>Your cart is empty</div> :
-                            this.state.order.items !== undefined && this.state.order.items.map((item) => (
-                                <div className="cart-book-item-container">
+                            this.state.order.items !== undefined && this.state.order.items.map((item, index) => (
+                                <div key={index} className="cart-book-item-container">
                                     <div className="item-title">{item.title}</div>
                                     <div className="item-qry">{item.qty}</div>
                                     <div className="item-price">{item.price}</div>
@@ -71,7 +76,7 @@ export default class CartPageComponent extends Component {
                 <Button variant="secondary" type="submit" className="button button__secondary" onClick={this.onOrderBuy}>Buy</Button>
                 <Button variant="light" type="button" className="cart__clear" onClick={this.onOrderDelete} >Delete</Button>
 
-            </form>
+            </>
 
         );
     }

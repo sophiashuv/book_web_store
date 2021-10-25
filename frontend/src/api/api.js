@@ -7,7 +7,7 @@ let instance = axios.create({
     baseURL: 'http://localhost:3001',
     timeout: 1000,
     headers: {
-        anon_token: tokenFromStorage,
+        Authorization: tokenFromStorage,
     },
 });
 
@@ -62,7 +62,7 @@ export const signin = async (email, password) => {
         baseURL: 'http://localhost:3001',
         timeout: 1000,
         headers: {
-            anon_token: authToken,
+            Authorization: authToken,
         }
     });
 
@@ -85,7 +85,7 @@ export const signup = async (email, password) => {
         baseURL: 'http://localhost:3001',
         timeout: 1000,
         headers: {
-            anon_token: authToken,
+            Authorization: authToken,
         }
     });
 

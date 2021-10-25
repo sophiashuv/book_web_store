@@ -12,9 +12,9 @@ export const decryptToken = (token) => {
 }
 
 export const isAuthorizedMiddleware = async (req, res, next) => {
-    const token = req.headers.anon_token;
+    const token = req.headers.authorization;
     if(!token){
-        res.status(403).send("Forbidden.");
+        res.status(403).send("Forbidden...");
         return;
     }
 

@@ -12,8 +12,7 @@ export class BooksFiltersComponent extends Component {
         this.state = {
             searchTerm: '',
             genres: '',
-            sort: '',
-            offset: 0
+            sort: ''
         };
 
         this.onSearchTermChange = this.onSearchTermChange.bind(this);
@@ -24,19 +23,18 @@ export class BooksFiltersComponent extends Component {
 
     onSearchTermChange(e) {
         const {value} = e.target;
-        this.setState({searchTerm: value});
+        this.props.onSearchTermChange(value);
     }
 
     onGenreChange(e) {
         const {value} = e.target;
-        this.setState({genres: value});
+        this.props.onGenreChange(value);
     }
 
     onSortChange(e) {
         const {value} = e.target;
-        this.setState({sort: value});
+        this.props.onSortChange(value);
     }
-
 
     async onSearch() {
         const {searchTerm, genres, sort, offset} = this.state;
@@ -73,7 +71,7 @@ export class BooksFiltersComponent extends Component {
                         value={this.state.searchTerm}
                         onChange={this.onSearchTermChange}
                     />
-                    <Button variant="dark" onClick={this.onSearch}>Search</Button>
+                    <Button variant="dark" onClick={this.props.onSearch}>Search</Button>
                 </div>
             </div>
         );
